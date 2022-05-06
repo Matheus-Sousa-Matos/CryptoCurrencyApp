@@ -1,19 +1,19 @@
 //
-//  Service.swift
+//  ServiceCurrencyConversion.swift
 //  CryptocurrencyApp
 //
-//  Created by Matheus de Sousa Matos on 03/05/22.
+//  Created by Matheus de Sousa Matos on 05/05/22.
 //
 
 import Foundation
 
-//MARK: - Service API Singleton
-public final class Service {
+//MARK: - Service API Currency Conversion
+public final class ServiceCurrencyConversion {
     
-    static let shared = Service()
-    private let url = "https://api.coinlore.net/api/tickers"
+    static let shared = ServiceCurrencyConversion()
+    private let url = "https://economia.awesomeapi.com.br/json/last/USD-BRL/"
     
-    func fetchCrypto(completion: @escaping (Response) -> ()) {
+    func fetchPriceUSDBRL(completion: @escaping (ResponseUSDBRL) -> ()) {
         let request = NSMutableURLRequest(url: NSURL(string: url)! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         request.httpMethod = "GET"
         
@@ -22,8 +22,7 @@ public final class Service {
             if let data = data {
                 let decoder = JSONDecoder()
                 do{
-                    let res = try decoder.decode(Response.self, from: data)
-                    
+                    let res = try decoder.decode(ResponseUSDBRL.self, from: data)
                     DispatchQueue.main.async {
                         completion(res)
                     }
@@ -36,5 +35,7 @@ public final class Service {
             
         }).resume()
     }
+    
+    
 }
 

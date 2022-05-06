@@ -11,9 +11,12 @@ struct Response: Codable{
     var data: [Crypto]
 }
 
-struct Crypto: Codable, Hashable{
+struct Crypto: Codable{
     let symbol: String?
     let name: String?
     let rank: Int?
     let price_usd: String?
+    let percent_change_24h: String?
+    let percent_change_7d: String?
+    let volume24: Double?
 }
